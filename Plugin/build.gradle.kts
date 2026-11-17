@@ -62,6 +62,8 @@ tasks.withType<ShadowJar> {
 }
 
 java {
+    // We compile against Java 25 libraries (Paper 26.x) while emitting Java 21 bytecode.
+    disableAutoTargetJvm()
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(25))
     }
