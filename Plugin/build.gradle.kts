@@ -10,6 +10,9 @@ plugins {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    // Paper API 26.x is compiled for Java 25; keep our bytecode at Java 21
+    // so the plugin still loads on older servers and Shadow can relocate it.
+    options.release.set(21)
 }
 
 repositories {
@@ -61,7 +64,7 @@ tasks.withType<ShadowJar> {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
@@ -137,8 +140,8 @@ dependencies {
     libby("org.bstats:bstats-bukkit:3.1.0")
 
     //Paper
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
-    implementation("com.github.retrooper:packetevents-spigot:2.13.0")
+    compileOnly("io.papermc.paper:paper-api:26.3.build.+")
+    implementation("com.github.retrooper:packetevents-spigot:2.14.0")
     compileOnly("org.apache.logging.log4j:log4j-core:2.25.1")
 
     //Libby

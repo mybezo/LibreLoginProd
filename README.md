@@ -49,8 +49,8 @@ alt="Contributors listed"></img>
 - Migration of a player's data by using one command
 
 ## Platforms ⚙️
-- [✔️] Velocity - up to 26.2
-- [✔️] Paper - up to 26.2
+- [✔️] Velocity - up to 26.3
+- [✔️] Paper - up to 26.3
 - [❌] BungeeCord - no longer supported, do not use it for production
 
 ## Main changes 
