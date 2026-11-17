@@ -31,12 +31,13 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
     - name: Shadow build with Gradle Wrapper
-      run: ./gradlew build
+      run: ./gradlew build shadowJar
     - name: Upload plugin JAR
       uses: actions/upload-artifact@v4
       with:
         name: LibreLoginProd
         path: target/*.jar
+        if-no-files-found: error
 
   dependency-submission:
 
