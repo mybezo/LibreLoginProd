@@ -5,7 +5,6 @@ plugins {
     id("io.github.goooler.shadow") version "8.1.8"
     id("net.kyori.blossom").version("1.3.1")
     id("java-library")
-    id("xyz.kyngs.libby.plugin").version("1.2.1")
 }
 
 tasks.withType<JavaCompile> {
@@ -72,15 +71,10 @@ tasks.withType<Jar> {
     from("../LICENSE.txt")
 }
 
-libby {
-    excludeDependency("org.slf4j:.*:.*")
-    excludeDependency("org.checkerframework:.*:.*")
-    excludeDependency("com.google.errorprone:.*:.*")
-    excludeDependency("com.google.protobuf:.*:.*")
-
-    // Often redeploys the same version, so calculating checksum causes false flags
-    noChecksumDependency("com.github.retrooper.packetevents:.*:.*")
-}
+// libby.json (runtime dependency manifest for Libby) is committed in
+// src/main/resources because the libby gradle plugin is no longer downloadable
+// from repo.kyngs.xyz. When changing a `compileOnly` library below that is
+// loaded at runtime by Libby, update libby.json accordingly.
 
 //configurations.all {
 //    // I hate this, but it needs to be done as bungeecord does not support newer versions of adventure, and packetevents includes it
@@ -106,29 +100,29 @@ dependencies {
     compileOnly("com.github.ProxioDev.ValioBungee:RedisBungee-Bungee:0.13.0")
 
     //MySQL
-    libby("org.mariadb.jdbc:mariadb-java-client:3.5.4")
-    libby("com.zaxxer:HikariCP:6.3.2")
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.5.4")
+    compileOnly("com.zaxxer:HikariCP:6.3.2")
 
     //SQLite
-    libby("org.xerial:sqlite-jdbc:3.50.3.0")
+    compileOnly("org.xerial:sqlite-jdbc:3.50.3.0")
 
     //PostgreSQL
-    libby("org.postgresql:postgresql:42.7.8")
+    compileOnly("org.postgresql:postgresql:42.7.8")
 
     //ACF
-    libby("com.github.kyngs.commands:acf-velocity:7d5bf7cac0")
-    libby("com.github.kyngs.commands:acf-paper:7d5bf7cac0")
+    compileOnly("com.github.kyngs.commands:acf-velocity:7d5bf7cac0")
+    compileOnly("com.github.kyngs.commands:acf-paper:7d5bf7cac0")
 
     //Utils
-    libby("com.github.ben-manes.caffeine:caffeine:3.2.2")
-    libby("org.spongepowered:configurate-hocon:4.2.0")
-    libby("at.favre.lib:bcrypt:0.10.2")
-    libby("dev.samstevens.totp:totp:1.7.1")
+    compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.2")
+    compileOnly("org.spongepowered:configurate-hocon:4.2.0")
+    compileOnly("at.favre.lib:bcrypt:0.10.2")
+    compileOnly("dev.samstevens.totp:totp:1.7.1")
     compileOnly("dev.simplix:protocolize-api:2.4.2")
-    libby("org.bouncycastle:bcprov-jdk18on:1.81")
-    libby("org.apache.commons:commons-email:1.6.0")
-    libby("net.kyori:adventure-text-minimessage:4.25.0")
-    libby("com.github.kyngs:LegacyMessage:0.2.0")
+    compileOnly("org.bouncycastle:bcprov-jdk18on:1.81")
+    compileOnly("org.apache.commons:commons-email:1.6.0")
+    compileOnly("net.kyori:adventure-text-minimessage:4.25.0")
+    compileOnly("com.github.kyngs:LegacyMessage:0.2.0")
 
     //Geyser
     compileOnly("org.geysermc.floodgate:api:2.2.0-SNAPSHOT")
@@ -136,8 +130,8 @@ dependencies {
     compileOnly("net.luckperms:api:5.5")
 
     //BStats
-    libby("org.bstats:bstats-velocity:3.1.0")
-    libby("org.bstats:bstats-bukkit:3.1.0")
+    compileOnly("org.bstats:bstats-velocity:3.1.0")
+    compileOnly("org.bstats:bstats-bukkit:3.1.0")
 
     //Paper
     compileOnly("io.papermc.paper:paper-api:26.3.build.+")
